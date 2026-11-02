@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Atletismo Redondela - C.A.R.</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Iconos Lucide CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .hero-bg {
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.75)), 
+                  url('Foto equipo.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 3px; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 25s linear infinite;
+    }
+    .animate-marquee:hover { animation-play-state: paused; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block !important; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased custom-scrollbar min-h-screen flex flex-col justify-between">
+
+  <!-- NAVEGACIÓN PRINCIPAL -->
+  <nav class="fixed w-full z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+      
+      <!-- LOGO / ESCUDO -->
+      <button onclick="showTab('inicio')" class="flex items-center gap-2 sm:gap-3 group text-left">
+        <img src="Escudo.jpg" alt="Escudo Club Atletismo Redondela C.A.R." class="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-full bg-white/10 p-1 border border-pink-500/30 group-hover:scale-105 transition-transform">
+        <div>
+          <span class="block text-sm sm:text-lg font-black tracking-wider uppercase text-white leading-none">CLUB ATLETISMO</span>
+          <span class="text-[10px] sm:text-xs font-bold text-pink-400 tracking-wider uppercase">Redondela • C.A.R.</span>
+        </div>
+      </button>
+
+      <!-- ENLACES DO MENÚ POR PESTANAS -->
+      <div class="hidden xl:flex space-x-3 font-medium text-xs sm:text-sm items-center">
+        <button onclick="showTab('inicio')" class="nav-btn hover:text-pink-400 transition-colors text-pink-400 font-bold" data-tab="inicio">Inicio</button>
+        <button onclick="showTab('historia')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="historia">Historia</button>
+        <button onclick="showTab('directiva')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="directiva">Directiva</button>
+        <button onclick="showTab('escola')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="escola">A Escola</button>
+        <button onclick="showTab('equipacion')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="equipacion">Equipación</button>
+        <button onclick="showTab('carreras')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="carreras">Carreiras</button>
+        <button onclick="showTab('atletas')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="atletas">Atletas</button>
+        <button onclick="showTab('noticias')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="noticias">Novas</button>
+        <button onclick="showTab('patrocinadores')" class="nav-btn hover:text-pink-400 transition-colors" data-tab="patrocinadores">Patrocinadores</button>
+      </div>
+
+      <!-- BOTÓNS DE ACCIÓN CON LOGO DE INSTAGRAM -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://www.instagram.com/clubatletismoredondela" target="_blank" rel="noopener noreferrer" class="px-3 py-2 bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 rounded-full text-white hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-md" title="Instagram @clubatletismoredondela">
+          <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          <span class="text-xs font-bold hidden sm:inline">Instagram</span>
+        </a>
+        <button onclick="showTab('hazte-socio')" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white text-[11px] sm:text-sm font-bold px-3 sm:px-4 py-2 sm:py-2.5 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-pink-500/25 flex items-center gap-1.5 sm:gap-2">
+          <span>Faite atleta / patrocinador</span>
+          <i data-lucide="heart-handshake" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- MENÚ SECUNDARIO MÓBIL RÁPIDO -->
+    <div class="xl:hidden flex overflow-x-auto space-x-2 px-4 py-2 bg-slate-950/90 border-t border-slate-800 text-xs custom-scrollbar">
+      <button onclick="showTab('inicio')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-pink-400 font-bold" data-tab="inicio">Inicio</button>
+      <button onclick="showTab('historia')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="historia">Historia</button>
+      <button onclick="showTab('directiva')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="directiva">Directiva</button>
+      <button onclick="showTab('escola')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="escola">A Escola</button>
+      <button onclick="showTab('equipacion')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="equipacion">Equipación</button>
+      <button onclick="showTab('carreras')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="carreras">Carreiras</button>
+      <button onclick="showTab('atletas')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="atletas">Atletas</button>
+      <button onclick="showTab('noticias')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="noticias">Novas</button>
+      <button onclick="showTab('patrocinadores')" class="nav-btn whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-slate-300" data-tab="patrocinadores">Patrocinadores</button>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL DE CONTIDOS -->
+  <main class="pt-24 sm:pt-20 flex-grow">
+
+    <!-- SECCIÓN PORTADA (HERO) -->
+    <section id="inicio" class="tab-content active hero-bg min-h-[calc(100vh-80px)] flex items-center py-12 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div class="grid md:grid-cols-12 gap-8 items-center">
+          
+          <div class="md:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-500/20 text-pink-400 text-[11px] sm:text-xs font-bold border border-pink-500/30 uppercase tracking-widest backdrop-blur-md">
+              <span class="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
+              Fundado no ano 2012 • Asociación Deportiva C.A.R.
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight leading-none text-white drop-shadow-md">
+              Familia <br>
+              <span class="bg-gradient-to-r from-pink-500 via-rose-400 to-white bg-clip-text text-transparent">
+                CAR
+              </span>
+            </h1>
+
+            <div class="flex flex-wrap gap-2.5 sm:gap-3 font-extrabold text-pink-400 text-base sm:text-lg md:text-xl">
+              <span>#FAMILIACAR</span>
+              <span>#FORZACAR</span>
+              <span>#ATLETISMOREDONDELA</span>
+            </div>
+
+            <p class="text-slate-300 text-sm sm:text-base md:text-lg max-w-xl leading-relaxed">
+              Un club onde se imparten valores, compañeirismo, disciplina e superación personal en cada adestramento e competición. Formando atletas e grandes persoas en Redondela con ilusión e esforzo a partes iguais.
+            </p>
+
+            <div class="flex flex-wrap gap-3 sm:gap-4 pt-2">
+              <button onclick="showTab('atletas')" class="bg-pink-600 hover:bg-pink-500 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-lg shadow-pink-600/30 flex items-center gap-2">
+                <i data-lucide="users" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                <span>Ver Atletas do Club</span>
+              </button>
+              <button onclick="showTab('hazte-socio')" class="bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all backdrop-blur-sm flex items-center gap-2">
+                <i data-lucide="heart-handshake" class="w-4 h-4 sm:w-5 sm:h-5 text-pink-400"></i>
+                <span>Faite atleta / patrocinador</span>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-slate-800/80 max-w-lg">
+              <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-800 backdrop-blur-sm">
+                <div class="text-xl sm:text-2xl md:text-3xl font-black text-pink-400">+60</div>
+                <div class="text-[10px] sm:text-xs text-slate-400 font-medium uppercase">Deportistas</div>
+              </div>
+              <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-800 backdrop-blur-sm">
+                <div class="text-xl sm:text-2xl md:text-3xl font-black text-white">2012</div>
+                <div class="text-[10px] sm:text-xs text-slate-400 font-medium uppercase">Ano Fundación</div>
+              </div>
+              <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-800 backdrop-blur-sm">
+                <div class="text-xl sm:text-2xl md:text-3xl font-black text-pink-400">45</div>
+                <div class="text-[10px] sm:text-xs text-slate-400 font-medium uppercase">Pódios Galegos</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-5">
+            <div class="bg-slate-800/80 border border-slate-700/60 p-5 sm:p-6 rounded-2xl shadow-2xl backdrop-blur-md space-y-5 sm:space-y-6">
+              <div class="flex items-center justify-between pb-4 border-b border-slate-700">
+                <div class="flex items-center gap-3">
+                  <div class="p-2.5 bg-pink-500/20 text-pink-400 rounded-xl">
+                    <i data-lucide="calendar" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-sm sm:text-base text-white">Próxima cita importante</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-400">Pista Cuberta Ourense</p>
+                  </div>
+                </div>
+                <span class="px-2.5 sm:px-3 py-1 bg-pink-500/20 text-pink-300 text-[10px] sm:text-xs font-bold rounded-full border border-pink-500/30">19 DEC 2026</span>
+              </div>
+
+              <div class="space-y-2 sm:space-y-3">
+                <h4 class="text-base sm:text-lg font-bold text-white">Control de Marcas C.A.R.</h4>
+                <p class="text-xs sm:text-sm text-slate-300">
+                  Realizarase un control de marcas oficial na pista cuberta de Ourense para todos os que queiran anotarse[cite: 5].
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between pt-2 text-xs text-slate-400 border-t border-slate-700/50">
+                <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-pink-400"></i> Ourense</span>
+                <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5 text-pink-400"></i> +50 Atletas</span>
+              </div>
+
+              <button onclick="showTab('carreras')" class="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-colors text-center block">
+                Ver carreiras e inscricións
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN HISTORIA -->
+    <section id="historia" class="tab-content py-16 sm:py-20 bg-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">A Orixe do C.A.R.</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mt-1">Historia e Socios Fundadores</h2>
+          <div class="w-16 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="bg-slate-800/60 p-6 sm:p-8 rounded-3xl border border-slate-700/60 space-y-6 sm:space-y-8">
+          <div class="max-w-4xl mx-auto text-center space-y-4">
+            <p class="text-slate-200 text-sm sm:text-base md:text-lg leading-relaxed italic">
+              "A Asociación Deportiva Club Atletismo Redondela xurde das inquedanzas dun grupo de homes e mulleres namorados do atletismo e deporte en xeral. Todos eles aportaron unha ilusión e esforzo a partes iguais e son peza indispensable para poder construír a base na que se cimenta esta asociación."
+            </p>
+            <span class="block text-pink-400 font-bold text-xs sm:text-sm">Velaquí os socios fundadores da Asociación Deportiva C.A.R.</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3 pt-4 border-t border-slate-700/50 text-xs">
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ALBERTO IGLESIAS CABALEIRO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ALBERTO NIETO GARCIA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ALFREDO GARCIA LAGO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> AMADOR REBOREDA GRAÑA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ANTON AMOEDO JIMENEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ANTONIO SOBRADO FERNANDEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> CARLOS MOURIÑO IGLESIAS</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JOSE MARIA LOPEZ MOLINOS</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> EDUARDO GOY GOMEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ENRIQUE CRESPO PAZOS</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> FABIAN UBEIRA VIDAL</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> FCO. JAVIER IGLESIAS DE LA IGLESIA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> FERNANDO FREIRIA GONZALEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> FRANCISCO OTERO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> GONZALO RODRIGEZ LOPEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JESUS FIGUEROA FERNANDEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JOSE ANDRES FERVENZA FRAGUEIRO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JOSE ANTONIO VALLEJO PEREZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JOSE CARLOS PEREZ PUENTE</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JOSE RAMON DARRIBA GONZALEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JUAN ANTONIO QUIÑONES MIGUEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> JUAN PABLO FIGUEROA FERNANDEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MANUEL ALBERTO PEREZ GARCIA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MANUEL ALEJANDRO LAGO RIOS</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MARCOS GARCIA LAGO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MARCOS UBEIRA VIDAL</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MARTIN FERNANDEZ PEREZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MELI BARCIELA ACOSTA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MIGUEL ANGEL GARCIA LAGO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> MIGUEL CORTIZO BOULLOSA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> PELUQUERIA JUAN CRESPO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> PILAR CASTRELOS</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> ROCIO FERREIRA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> RUBEN D.PINTOS RODRIGEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> SABINO ALBAREZ FIGUEROA</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> SANTIAGO FIGUEROA FERNANDEZ</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> VANESA NOGUEIRA GALLETANO</div>
+            <div class="bg-slate-900/70 p-3 rounded-xl border border-slate-800 font-semibold text-slate-300 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-pink-400 flex-shrink-0"></i> DOBLE PAUTA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DIRECTIVA -->
+    <section id="directiva" class="tab-content py-16 sm:py-20 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Xestión e Goberno</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mt-1">Xunta Directiva</h2>
+          <div class="w-16 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+          <p class="text-xs text-slate-400 mt-2">Preme nas imaxes para amplialas</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-slate-900 p-6 rounded-2xl border border-pink-500/30 text-center space-y-3 relative overflow-hidden">
+            <div onclick="zoomImage('Ana romasanta.jpg', 'Ana Romasanta - Presidencia')" class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-pink-500 shadow-lg shadow-pink-500/20 cursor-pointer hover:scale-110 transition-transform">
+              <img src="Ana romasanta.jpg" alt="Ana Romasanta - Presidenta C.A.R." class="w-full h-full object-cover object-top">
+            </div>
+            <span class="text-[10px] text-pink-400 font-bold uppercase tracking-wider block">Ana Romasanta</span>
+            <h3 class="text-xl font-bold text-white">Presidencia</h3>
+          </div>
+          
+          <div class="bg-slate-900 p-6 rounded-2xl border border-pink-500/30 text-center space-y-3 relative overflow-hidden">
+            <div onclick="zoomImage('Andrés Corugeira Ligero.jpg', 'Andrés Corugeira Ligero - Vicepresidencia')" class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-pink-500 shadow-lg shadow-pink-500/20 cursor-pointer hover:scale-110 transition-transform">
+              <img src="Andrés Corugeira Ligero.jpg" alt="Andrés Corugeira Ligero - Vicepresidente C.A.R." class="w-full h-full object-cover object-top">
+            </div>
+            <span class="text-[10px] text-pink-400 font-bold uppercase tracking-wider block">Andrés Corugeira Ligero</span>
+            <h3 class="text-xl font-bold text-white">Vicepresidencia</h3>
+          </div>
+
+          <div class="bg-slate-900 p-6 rounded-2xl border border-pink-500/30 text-center space-y-3 relative overflow-hidden">
+            <div onclick="zoomImage('Gabriel Corujeira Rodríguez.jpg', 'Gabriel Corujeira Rodríguez - Secretaría')" class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-pink-500 shadow-lg shadow-pink-500/20 cursor-pointer hover:scale-110 transition-transform">
+              <img src="Gabriel Corujeira Rodríguez.jpg" alt="Gabriel Corujeira Rodríguez - Secretario C.A.R." class="w-full h-full object-cover">
+            </div>
+            <span class="text-[10px] text-pink-400 font-bold uppercase tracking-wider block">Gabriel Corujeira Rodríguez</span>
+            <h3 class="text-xl font-bold text-white">Secretaría</h3>
+            <p class="text-xs text-slate-400">Xestión de licenzas, federados e trámites administrativos dos atletas.</p>
+          </div>
+
+          <div class="bg-slate-900 p-6 rounded-2xl border border-pink-500/30 text-center space-y-3 relative overflow-hidden">
+            <div onclick="zoomImage('Vane.jpg', 'Vane - Tesourería')" class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-pink-500 shadow-lg shadow-pink-500/20 cursor-pointer hover:scale-110 transition-transform">
+              <img src="Vane.jpg" alt="Vane - Tesoureira C.A.R." class="w-full h-full object-cover object-top">
+            </div>
+            <span class="text-[10px] text-pink-400 font-bold uppercase tracking-wider block">Vane</span>
+            <h3 class="text-xl font-bold text-white">Tesourería</h3>
+            <p class="text-xs text-slate-400">Control económico, orzamentos e relación con patrocinadores e colaboradores.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN A ESCOLA -->
+    <section id="escola" class="tab-content py-16 sm:py-20 bg-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16">
+        
+        <div class="grid md:grid-cols-12 gap-8 items-center">
+          <div class="md:col-span-7 space-y-6">
+            <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Obxectivo e Formación</span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase">A Escola de Atletismo</h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              O obxectivo principal da Escola é potenciar o atletismo de base mediante a súa introdución, iniciación, perfeccionamento e promoción entre os nenos e nenas, utilizando o deporte como ferramenta de formación e educación en valores.
+            </p>
+            
+            <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/60 space-y-3">
+              <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-200">
+                <i data-lucide="shield-check" class="w-5 h-5 text-pink-400 flex-shrink-0 mt-0.5"></i>
+                <span>Todos os nosos atletas están <strong>mutualizados no deporte escolar</strong>, co seu correspondente seguro deportivo.</span>
+              </div>
+              <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-200">
+                <i data-lucide="award" class="w-5 h-5 text-pink-400 flex-shrink-0 mt-0.5"></i>
+                <span>Assimismo, todos os atletas posúen <strong>ficha federada da Federación Galega de Atletismo</strong>.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-5 bg-gradient-to-br from-slate-800 to-slate-800/80 p-6 rounded-3xl border border-pink-500/30 text-center space-y-4 shadow-xl">
+            <div onclick="zoomImage('Foto Javier Besada Vázquez.jpg', 'Javier Besada Vázquez - Adestrador')" class="w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-pink-500 shadow-lg shadow-pink-500/20 cursor-pointer hover:scale-105 transition-transform">
+              <img src="Foto Javier Besada Vázquez.jpg" alt="Javier Besada Vázquez - Adestrador C.A.R." class="w-full h-full object-cover object-top">
+            </div>
+            <div>
+              <span class="text-[10px] sm:text-xs text-pink-400 font-bold uppercase tracking-wider">O noso Adestrador Principal</span>
+              <h3 class="text-xl sm:text-2xl font-black text-white mt-1">JAVIER BESADA VÁZQUEZ</h3>
+              <div class="mt-2 text-xs text-slate-300 font-medium space-y-1">
+                <p class="text-pink-300 font-semibold">• Grao en Ciencias da Actividade Física e do Deporte</p>
+                <p class="text-slate-400">• Máster en Alto Rendemento Deportivo COE / UCAM</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed italic pt-2 border-t border-slate-700/60">
+              "Presenta sobradamente toda a ilusión e a profesionalidade para axudarnos no noso proxecto deportivo."
+            </p>
+          </div>
+        </div>
+
+        <!-- FOTO DE EQUIPO -->
+        <div class="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
+          <img src="Foto equipo.jpg" alt="Foto Equipo Club Atletismo Redondela" class="w-full h-auto object-cover">
+        </div>
+
+        <!-- ESCOLA DE INICIACIÓN -->
+        <div class="pt-8 border-t border-slate-800">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Días de adestramento: Martes e Xoves</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white uppercase mt-1">Escola de iniciación</h2>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/60 hover:border-pink-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-bold rounded-full">Primeiro Grupo</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-3">Sub-8, Sub-10 e Sub-12</h3>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-700/60 text-xs text-slate-300 space-y-2">
+                <div class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-pink-400"></i> 16:45 a 17:45</div>
+                <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-pink-400"></i> IES Illa de San Simón</div>
+              </div>
+            </div>
+
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/60 hover:border-pink-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-bold rounded-full">Segundo Grupo</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-3">Sub-14 e Sub-16</h3>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-700/60 text-xs text-slate-300 space-y-2">
+                <div class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-pink-400"></i> 17:45 a 19:00</div>
+                <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-pink-400"></i> IES Illa de San Simón</div>
+              </div>
+            </div>
+
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/60 hover:border-pink-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-bold rounded-full">Grupo Avanzado</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-3">Sub-18 en diante</h3>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-700/60 text-xs text-slate-300 space-y-2">
+                <div class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-pink-400"></i> 18:50 a 20:15</div>
+                <div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-pink-400"></i> IES Illa de San Simón</div>
+              </div>
+            </div>
+
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/60 hover:border-pink-500/50 transition-all flex flex-col justify-between">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-bold rounded-full">Grupo Adultos</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-3">Máster</h3>
+                <p class="text-slate-300 text-xs mt-3 leading-relaxed">
+                  Contáctanos para saber máis sobre os horarios e grupos de adestramento.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-700/60">
+                <button onclick="showTab('hazte-socio')" class="w-full py-2 bg-pink-600/80 hover:bg-pink-600 text-white font-bold text-xs rounded-xl transition-all">
+                  Contactar connosco
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN EQUIPACIÓN -->
+    <section id="equipacion" class="tab-content py-16 sm:py-20 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Identidade C.A.R.</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mt-1">A Nosa Equipación</h2>
+          <div class="w-16 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+          <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-4 text-center">
+            <div class="w-16 h-16 mx-auto bg-pink-500/20 text-pink-400 rounded-full flex items-center justify-center border border-pink-500/30">
+              <i data-lucide="shirt" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white">Equipación de Competición</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Deseñada coas cores oficiais do club (rosa corporativo e detalles en branco) para meirande transpirabilidade e lixeireza en cada proba oficial.
+            </p>
+          </div>
+
+          <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-4 text-center">
+            <div class="w-16 h-16 mx-auto bg-pink-500/20 text-pink-400 rounded-full flex items-center justify-center border border-pink-500/30">
+              <i data-lucide="package" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white">Rúa e Chándal</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Indumentaria de abrigo e representación para desprazamentos, concentracións e pódios baixo o lema da #FamiliaCAR.
+            </p>
+          </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-slate-900 p-4 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden cursor-pointer hover:border-pink-500/50 transition-all group" onclick="zoomImage('Equipación.jpg', 'Equipación Oficial C.A.R.')">
+          <div class="relative overflow-hidden rounded-2xl">
+            <img src="Equipación.jpg" alt="Equipación Oficial Club Atletismo Redondela" class="w-full h-auto object-contain rounded-2xl group-hover:scale-102 transition-transform">
+            <div class="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span class="bg-slate-900/90 text-white text-xs font-bold px-4 py-2 rounded-full border border-pink-500/40 flex items-center gap-2">
+                <i data-lucide="zoom-in" class="w-4 h-4 text-pink-400"></i> Preme para ampliar imaxe
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN CARREIRAS -->
+    <section id="carreras" class="tab-content py-16 sm:py-20 bg-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-16">
+        
+        <div class="bg-gradient-to-br from-slate-800 to-slate-800/90 border border-pink-500/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+          <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="grid md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-7 space-y-6">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="bg-pink-500 text-white font-black text-[10px] sm:text-xs px-3 py-1 rounded-full uppercase tracking-wider">Próximo Evento Destacado</span>
+                <span class="text-slate-400 text-xs sm:text-sm flex items-center gap-1"><i data-lucide="calendar" class="w-4 h-4 text-pink-400"></i> 19 de Decembro de 2026</span>
+              </div>
+
+              <h3 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+                Control de Marcas C.A.R. - Ourense
+              </h3>
+
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Nesta proba realizarase un control de marcas oficial para todos os atletas que queiran anotarse na pista cuberta de Ourense[cite: 5]. Unha oportunidade ideal para establecer marcas da tempada e competir noutra das mellores instalacións de Galicia.
+              </p>
+
+              <div class="grid grid-cols-2 gap-4 pt-2">
+                <div class="bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-slate-700/60">
+                  <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-semibold">Ubicación</div>
+                  <div class="text-sm sm:text-base font-bold text-white flex items-center gap-1.5 mt-1">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-pink-400"></i> Pista Cuberta Ourense
+                  </div>
+                </div>
+                <div class="bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-slate-700/60">
+                  <div class="text-[10px] sm:text-xs text-slate-400 uppercase font-semibold">Participantes esperados</div>
+                  <div class="text-sm sm:text-base font-bold text-white flex items-center gap-1.5 mt-1">
+                    <i data-lucide="users" class="w-4 h-4 text-pink-400"></i> Máis de 50 atletas
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-5 bg-slate-900/80 p-6 rounded-2xl border border-slate-700/80 space-y-4 text-center">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-pink-500/10 rounded-full flex items-center justify-center border border-pink-500/30">
+                <i data-lucide="timer" class="w-8 h-8 sm:w-10 sm:h-10 text-pink-400"></i>
+              </div>
+              <h4 class="text-lg sm:text-xl font-bold text-white">Queres participar no Control?</h4>
+              <p class="text-xs text-slate-400">Inscribe o teu nome para a expedición do club a este evento.</p>
+              <button onclick="showTab('hazte-socio')" class="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-pink-600/30 transition-all text-xs sm:text-sm flex items-center justify-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                <span>Anotarme / Contactar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Calendario de Probas e Adestramentos</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white uppercase mt-1">Carreiras e Adestramentos</h2>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/10 text-pink-400 text-xs font-bold rounded-full">Rúa / Solidaria</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-2">Milla Solidaria Anedia</h3>
+                <p class="text-xs text-slate-400 mt-2">Carreira popular e solidaria.</p>
+              </div>
+              <div class="text-xs text-slate-300 space-y-1">
+                <div>📅 8 Novembro 2026</div>
+                <div>📍 Pontevedra</div>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/10 text-pink-400 text-xs font-bold rounded-full">Campo a Través</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-2">II Cross escolar Xogade</h3>
+                <p class="text-xs text-slate-400 mt-2">Proba escolar Xogade.</p>
+              </div>
+              <div class="text-xs text-slate-300 space-y-1">
+                <div>📅 22 Novembro 2026</div>
+                <div>📍 Vigo</div>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
+              <div>
+                <span class="px-3 py-1 bg-pink-500/10 text-pink-400 text-xs font-bold rounded-full">Adestramento</span>
+                <h3 class="text-lg sm:text-xl font-bold text-white mt-2">Adestramento Tecnificación Pista</h3>
+                <p class="text-xs text-slate-400 mt-2">Sesión específica de técnica e fondo.</p>
+              </div>
+              <div class="text-xs text-slate-300 space-y-1">
+                <div>📅 Sábado • Horario matinal</div>
+                <div>📍 IES Illa de San Simón</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN ATLETAS (LISTAXE OFICIAL) -->
+    <section id="atletas" class="tab-content py-16 sm:py-20 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Noso Equipo</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mt-1">Atletas do Club</h2>
+          <div class="w-16 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+          <p class="text-xs sm:text-sm text-slate-400 mt-3">Relación oficial de deportistas federados e en idade escolar do C.A.R.[cite: 15, 16]</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- SUB 8 -->
+          <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-lg font-black text-pink-400">Sub 8</h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-bold">4 Atletas</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Sabela Gil Blanco</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Samuel Pregal Fernanz</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Enzo Pérez Míguez</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Elina Pineda Rodríguez</span></li>
+            </ul>
+          </div>
+
+          <!-- SUB 10 -->
+          <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-lg font-black text-pink-400">Sub 10</h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-bold">9 Atletas</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Éric Almofrey Rodríguez</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Carme Blanco Reguera</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Luca Gozález Couñago</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Mia Otero Bouzó</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Manuel Rivas Gomez</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Gael Sacristan Manuel</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Xandre Santos Fernández</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Martina Somoza Estraviz</span></li>
+              <li class="flex justify-between bg-slate-800/40 px-3 py-2 rounded-lg"><span>Bruno Vasconcelos Muiños</span></li>
+            </ul>
+          </div>
+
+          <!-- SUB 12 -->
+          <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-lg font-black text-pink-400">Sub 12</h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-bold">12 Atletas</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Carmen Manuela Alonso Domínguez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Brais Amoedo Gonzalez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Julia Arias Pérez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Martin Iglesias Iglesias</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Noelia Lobo Lourido</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Fran Méndez García</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Xoel Méndez García</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Sabela Muiños Orge</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Hugo Pereira Cao</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Jose Maria Pineda Rodríguez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Matias Soler Vilas</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Irene Urdiales Ballesteros</li>
+            </ul>
+          </div>
+
+          <!-- SUB 14 -->
+          <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-lg font-black text-pink-400">Sub 14</h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-bold">8 Atletas</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Daniel Barciela Cusi</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Antía Aira Alonso</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Héctor Carrera Castro</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Daniel Estevez Veiga</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Mateo Menéndez Abalo</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Xoan Muiños Orge</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Adrian Sacristan Manuel</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Carmela Santos Fernandez</li>
+            </ul>
+          </div>
+
+          <!-- SUB 16 & SUB 18 -->
+          <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-lg font-black text-pink-400">Sub 16 e Sub 18</h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-bold">6 Atletas</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg"><strong>Sub-16:</strong> Irea Alvarez Fernandez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg"><strong>Sub-18:</strong> Brais Barros Rodríguez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg"><strong>Sub-18:</strong> Xoán Corugeira Ligero</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg"><strong>Sub-18:</strong> Brais Couñago Cabaleiro</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg"><strong>Sub-18:</strong> Nuno González Couñago</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg"><strong>Sub-18:</strong> Hugo Menéndez Abalo</li>
+            </ul>
+          </div>
+
+          <!-- SUB 20, SUB 23 e MASTER -->
+          <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="text-lg font-black text-pink-400">Sub-20, Sub-23 e Master</h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300 font-bold">Atletas Absolutos</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-300 max-h-64 overflow-y-auto custom-scrollbar">
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Gael Couñago Romasanta</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Hugo Couñago Cabaleiro</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Antía Barrio Cabaleiro</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Xoel Parada Blanco</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Ines Malvesada Rodiño</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Alexandre Alfaya CainzoS</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Guilherme Vicente Vaz</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Andres Corugeira Ligero</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Ivan Lago Fontan</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Gabriel Corujeira Rodríguez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Antón Amoedo Giménez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Jose Luis Costas Fernandez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Abel Darriba Barba</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Jose Andrés Fervenza Fragueiro</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">David Garabatos Barciela</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Vicent Hernandez Ramirez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Alex Murias Rodríguez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Guillermo Pedrero Lopez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Raquel Sueiro Dominguez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Diego Míguez Álvarez</li>
+              <li class="bg-slate-800/40 px-3 py-2 rounded-lg">Mar Vázquez Martínez</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN NOVAS (CHARLA PRIMERO, DESPOIS AS FICHAXES) -->
+    <section id="noticias" class="tab-content py-16 sm:py-20 bg-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-16">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Actualidade e Avisos</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mt-1">Novas do Club</h2>
+          <div class="w-16 h-1 bg-pink-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+        
+        <!-- CHARLA DE PSICOLOXÍA (AGORA ARRIBA) -->
+        <div class="bg-slate-950 border border-pink-500/30 rounded-3xl p-6 sm:p-8 shadow-xl grid md:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+          <div class="md:col-span-5 rounded-2xl overflow-hidden border border-pink-500/30 shadow-lg cursor-pointer" onclick="zoomImage('Charla.jpeg', 'Charla Psicoloxía Deportiva')">
+            <img src="Charla.jpeg" alt="Charla Psicoloxía Deportiva - María González Alonso" class="w-full h-auto object-cover">
+          </div>
+          <div class="md:col-span-7 space-y-4">
+            <span class="px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-bold rounded-full border border-pink-500/30">Evento / Formación</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-white">Charla-taller de Psicología Deportiva</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Un pequeno recordatorio para que non os obláides de anotar na agenda nosa cita do próximo <strong>venres 6 de novembro</strong>[cite: 5].
+            </p>
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1.5 font-medium">
+              <p>🧠 <strong>Charla-taller de Psicología Deportiva</strong> con María González Alonso (Psicóloga do deporte e exatleta)[cite: 5].</p>
+              <p>🕗 <strong>Hora:</strong> 20:00 h[cite: 5]</p>
+              <p>📍 <strong>Lugar:</strong> Auditorio Multiusos da Xunqueira[cite: 5]</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- XA ESTÁN AQUÍ AS NOSAS NOVAS FICHAXES (AGORA ABAIXO) -->
+        <div class="space-y-8 pt-8 border-t border-slate-800">
+          <div class="text-center max-w-2xl mx-auto">
+            <h3 class="text-2xl sm:text-3xl font-black text-white uppercase">Xa están aquí as nosas novas fichaxes</h3>
+            <p class="text-xs sm:text-sm text-slate-400 mt-2">Presentación oficial dos novos atletas incorporados ao C.A.R.</p>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div class="bg-slate-950 border border-pink-500/30 rounded-3xl p-4 shadow-xl overflow-hidden cursor-pointer group" onclick="zoomImage('Fichaje nuno (1).jpg', 'Nova Fichaxe - Nuno')">
+              <img src="Fichaje nuno (1).jpg" alt="Nova Fichaxe Nuno" class="w-full h-auto object-cover rounded-2xl group-hover:scale-102 transition-transform">
+            </div>
+            <div class="bg-slate-950 border border-pink-500/30 rounded-3xl p-4 shadow-xl overflow-hidden cursor-pointer group" onclick="zoomImage('Fichaje nuno (2).jpg', 'Nova Fichaxe - Xoán e Compañía')">
+              <img src="Fichaje nuno (2).jpg" alt="Nova Fichaxe Xoan" class="w-full h-auto object-cover rounded-2xl group-hover:scale-102 transition-transform">
+            </div>
+            <div class="bg-slate-950 border border-pink-500/30 rounded-3xl p-4 shadow-xl overflow-hidden cursor-pointer group" onclick="zoomImage('Fichaje nuno (3).jpg', 'Nova Fichaxe - Brais Barros')">
+              <img src="Fichaje nuno (3).jpg" alt="Nova Fichaxe Brais Barros" class="w-full h-auto object-cover rounded-2xl group-hover:scale-102 transition-transform">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PATROCINADORES E INSTITUCIÓNS SEPARADOS -->
+    <section id="patrocinadores" class="tab-content py-16 sm:py-20 bg-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-16">
+        <div class="text-center max-w-3xl mx-auto space-y-4">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Apoio e Colaboración</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase">Patrocinadores e Institucións</h2>
+          <div class="w-16 h-1 bg-pink-500 mx-auto rounded-full"></div>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed pt-2">
+            Grazas ao apoio fundamental das empresas privadas e das institucións públicas que fan posible este proxecto deportivo en Redondela.
+          </p>
+        </div>
+
+        <!-- PATROCINADOR PRINCIPAL -->
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-4">
+            <span class="px-4 py-1 bg-pink-500/20 text-pink-400 text-xs font-black rounded-full border border-pink-500/40 uppercase tracking-widest">
+              ★ Patrocinador Principal ★
+            </span>
+          </div>
+          <div class="bg-gradient-to-b from-slate-800 to-slate-900 p-8 md:p-12 rounded-3xl border-2 border-pink-500/50 flex flex-col items-center justify-center hover:border-pink-500 transition-all shadow-2xl shadow-pink-500/10">
+            <img src="PUBLI 8.jpeg" alt="Rodavigo - Patrocinador Principal" class="max-h-28 md:max-h-36 w-auto object-contain bg-white/95 p-4 rounded-2xl shadow-md">
+            <p class="text-xs text-slate-400 mt-4 font-semibold uppercase tracking-wider">Apoio fundamental ao deporte de base de Redondela</p>
+          </div>
+        </div>
+
+        <!-- BLOQUE 1: PATROCINADORES OFICIAIS (EMPRESAS) -->
+        <div>
+          <h3 class="text-center text-sm font-bold uppercase tracking-wider text-pink-400 mb-6">Empresas Patrocinadoras</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 3.jpeg" alt="Podología Integral" class="max-h-14 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 5.jpeg" alt="Hobbybike" class="max-h-14 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 7.jpeg" alt="Ford" class="max-h-14 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 9.jpeg" alt="Talleres Ponteseca" class="max-h-14 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: INSTITUCIÓNS E ORGANISMOS PÚBLICOS -->
+        <div class="pt-6 border-t border-slate-800">
+          <h3 class="text-center text-sm font-bold uppercase tracking-wider text-pink-400 mb-6">Institucións e Entidades Públicas</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 1.jpeg" alt="Redondela é Deporte" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 2.jpeg" alt="Xunta de Galicia" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 4.jpeg" alt="Deputación de Pontevedra" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAITE ATLETA / PATROCINADOR -->
+    <section id="hazte-socio" class="tab-content py-16 sm:py-20 bg-slate-950">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10">
+          <span class="text-pink-400 font-bold text-xs sm:text-sm tracking-widest uppercase">Únete ao C.A.R.</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mt-1">Faite atleta / patrocinador</h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-2">Completa o formulario para colaborar como patrocinador ou inscribir un novo atleta.</p>
+        </div>
+        <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-8">
+          
+          <form action="https://formspree.io/f/xaeeprjq" method="POST" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Nome completo ou Empresa</label>
+                <input type="text" name="nombre" required placeholder="Ex: María Fernández" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Teléfono ou Correo</label>
+                <input type="text" name="contacto" required placeholder="Ex: 600000000 / contacto@correo.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Modalidade de Interese</label>
+              <select name="modalidad" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm">
+                <option value="Inscrición de Atleta">Inscrición de Atleta</option>
+                <option value="Empresa / Patrocinador">Empresa / Patrocinador Oficial</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Mensaxe ou Comentario</label>
+              <textarea name="mensaje" rows="3" placeholder="Escribe aquí calquera dúbida ou información adicional..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-pink-600/30 flex items-center justify-center gap-2 text-sm">
+              <i data-lucide="send" class="w-5 h-5"></i>
+              <span>Enviar Solicitude</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-10 text-slate-400 text-xs sm:text-sm overflow-hidden mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 pb-6 border-b border-slate-800/80 space-y-4">
+      <div class="text-center"><span class="text-xs font-bold uppercase tracking-widest text-slate-400">Patrocinadores e Institucións Colaboradoras</span></div>
+      <div class="relative overflow-hidden w-full py-3 bg-slate-900/50 rounded-2xl border border-slate-800">
+        <div class="animate-marquee items-center gap-12 px-6">
+          <img src="PUBLI 8.jpeg" alt="Rodavigo" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 border-2 border-pink-500/50">
+          <img src="PUBLI 3.jpeg" alt="Podología" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+          <img src="PUBLI 5.jpeg" alt="Hobbybike" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+          <img src="PUBLI 7.jpeg" alt="Ford" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+          <img src="PUBLI 9.jpeg" alt="Ponteseca" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+          <img src="PUBLI 1.jpeg" alt="Redondela" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+          <img src="PUBLI 2.jpeg" alt="Xunta" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+          <img src="PUBLI 4.jpeg" alt="Deputación" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">&copy; 2026 Club Atletismo Redondela. Tódolos dereitos reservados.</div>
+  </footer>
+
+  <!-- MODAL ZOOM DE IMAXES -->
+  <div id="imageZoomModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex flex-col items-center justify-center hidden p-4" onclick="closeZoomModal()">
+    <button onclick="closeZoomModal()" class="absolute top-6 right-6 text-white hover:text-pink-400 p-2"><i data-lucide="x" class="w-8 h-8"></i></button>
+    <img id="zoomedImage" src="" alt="Ampliada" class="max-h-[80vh] max-w-[90vw] object-contain rounded-2xl border-2 border-pink-500 shadow-2xl">
+    <p id="zoomedCaption" class="text-white text-base sm:text-lg font-bold mt-4 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-700 text-center"></p>
+  </div>
+
+  <!-- SCRIPT LÓXICO -->
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display = 'none'; });
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-pink-400', 'font-bold', 'bg-pink-500/20');
+      });
+      const selected = document.getElementById(tabId);
+      if (selected) { selected.classList.add('active'); selected.style.display = 'block'; }
+      
+      document.querySelectorAll(`.nav-btn[data-tab="${tabId}"]`).forEach(activeBtn => {
+        activeBtn.classList.add('text-pink-400', 'font-bold');
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function zoomImage(src, caption) {
+      document.getElementById('zoomedImage').src = src;
+      document.getElementById('zoomedCaption').textContent = caption;
+      document.getElementById('imageZoomModal').classList.remove('hidden');
+    }
+
+    function closeZoomModal() {
+      document.getElementById('imageZoomModal').classList.add('hidden');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.lucide) lucide.createIcons();
+      showTab('inicio');
+    });
+  </script>
+</body>
+</html>
