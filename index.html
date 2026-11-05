@@ -26,8 +26,8 @@
     }
     .animate-marquee {
       display: flex;
-      width: 200%;
-      animation: marquee 25s linear infinite;
+      width: max-content;
+      animation: marquee 30s linear infinite;
     }
     .animate-marquee:hover { animation-play-state: paused; }
 
@@ -787,10 +787,12 @@
         <!-- INSTITUCIÓNS E ENTIDADES PÚBLICAS -->
         <div class="pt-6 border-t border-slate-800">
           <h3 class="text-center text-sm font-bold uppercase tracking-wider text-pink-400 mb-6">Institucións e Entidades Públicas</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 max-w-5xl mx-auto">
             <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 1.jpeg" alt="Redondela é Deporte" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
             <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 2.jpeg" alt="Xunta de Galicia" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
             <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 4.jpeg" alt="Deputación de Pontevedra" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="PUBLI 6.jpeg" alt="Concello de Redondela" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
+            <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-center hover:border-pink-500/50 transition-all"><img src="Publi 10.jpeg" alt="Federación Galega de Atletismo" class="max-h-16 w-auto object-contain bg-white/90 p-2 rounded-xl"></div>
           </div>
         </div>
 
@@ -843,20 +845,35 @@
 
   </main>
 
-  <!-- PIE DE PÁGINA -->
+  <!-- PIE DE PÁGINA CON CARRUSEL INFINITO DUPLICADO -->
   <footer class="bg-slate-950 border-t border-slate-800 py-10 text-slate-400 text-xs sm:text-sm overflow-hidden mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 pb-6 border-b border-slate-800/80 space-y-4">
       <div class="text-center"><span class="text-xs font-bold uppercase tracking-widest text-slate-400">Patrocinadores e Institucións Colaboradoras</span></div>
       <div class="relative overflow-hidden w-full py-3 bg-slate-900/50 rounded-2xl border border-slate-800">
-        <div class="animate-marquee items-center gap-12 px-6">
-          <img src="PUBLI 8.jpeg" alt="Rodavigo" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 border-2 border-pink-500/50">
-          <img src="PUBLI 3.jpeg" alt="Podología" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
-          <img src="PUBLI 5.jpeg" alt="Hobbybike" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
-          <img src="PUBLI 7.jpeg" alt="Ford" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
-          <img src="PUBLI 9.jpeg" alt="Ponteseca" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
-          <img src="PUBLI 1.jpeg" alt="Redondela" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
-          <img src="PUBLI 2.jpeg" alt="Xunta" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
-          <img src="PUBLI 4.jpeg" alt="Deputación" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5">
+        <div class="animate-marquee flex items-center gap-12 px-6">
+          <!-- CONXUNTO 1 -->
+          <img src="PUBLI 8.jpeg" alt="Rodavigo" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 border-2 border-pink-500/50 flex-shrink-0">
+          <img src="PUBLI 3.jpeg" alt="Podología" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 5.jpeg" alt="Hobbybike" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 7.jpeg" alt="Ford" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 9.jpeg" alt="Ponteseca" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 1.jpeg" alt="Redondela é Deporte" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 2.jpeg" alt="Xunta" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 4.jpeg" alt="Deputación" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 6.jpeg" alt="Concello de Redondela" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="Publi 10.jpeg" alt="Federación Galega" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          
+          <!-- CONXUNTO 2 DUPLICADO PARA BUCLE INFINITO PERFECTO -->
+          <img src="PUBLI 8.jpeg" alt="Rodavigo" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 border-2 border-pink-500/50 flex-shrink-0">
+          <img src="PUBLI 3.jpeg" alt="Podología" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 5.jpeg" alt="Hobbybike" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 7.jpeg" alt="Ford" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 9.jpeg" alt="Ponteseca" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 1.jpeg" alt="Redondela é Deporte" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 2.jpeg" alt="Xunta" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 4.jpeg" alt="Deputación" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="PUBLI 6.jpeg" alt="Concello de Redondela" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
+          <img src="Publi 10.jpeg" alt="Federación Galega" class="h-10 sm:h-12 w-auto object-contain bg-white/90 rounded p-1.5 flex-shrink-0">
         </div>
       </div>
     </div>
